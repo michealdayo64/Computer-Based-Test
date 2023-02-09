@@ -1,4 +1,5 @@
 asgiref==3.6.0
+decouple==0.0.7
 Django==3.0
 gunicorn==20.1.0
 psycopg2-binary==2.9.5
