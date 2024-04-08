@@ -58,7 +58,7 @@ $.ajax({
     success: function(response){
         //console.log(response);
         const data = response.data
-        console.log(data)
+
         
         if(data.length === 0){
             quizBox.innerHTML = `<h1>Question not added yet</h1>`

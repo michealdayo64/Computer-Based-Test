@@ -21,15 +21,15 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-x4=65j10y2s%^0i^l*s&tid7ug@=ed@ogkc*0r%=%rxxgsg6la'
+# SECRET_KEY = 'django-insecure-x4=65j10y2s%^0i^l*s&tid7ug@=ed@ogkc*0r%=%rxxgsg6la'
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+# DEBUG = True
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["3.94.253.252"]
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["3.94.253.252"]
 
 # Application definition
 
@@ -40,9 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # APP
     'Quiz',
     'questions',
-    'results'
+    'results',
+
+    # API
+    "QuizApi"
 ]
 
 MIDDLEWARE = [
@@ -56,7 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-#ROOT_URLCONF = 'CBT.urls'
+# ROOT_URLCONF = 'CBT.urls'
 ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
 
 TEMPLATES = [
@@ -75,21 +80,21 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'CBT.wsgi.application'
+# WSGI_APPLICATION = 'CBT.wsgi.application'
 WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}'''
+}
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config("DB_NAME"),
@@ -98,7 +103,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
     }
-}
+}'''
 
 
 # Password validation
