@@ -16,6 +16,7 @@ class Aquiz(models.Model):
     required_score_to_pass = models.IntegerField(
         help_text='Requ++ired score to pass')
     difficulty = models.CharField(max_length=6, choices=DIFF_CHOICES)
+    image = models.FileField(null=True, blank=True, upload_to="quiz")
 
     def __str__(self):
         return f"{self.name} - {self.topic}"

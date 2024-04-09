@@ -120,7 +120,7 @@ sendData = () => {
            console.log(response.results) 
            results = response.results
            quizForm.classList.add("not-visible")
-           scoreResult.innerHTML = `${response.Passed ? 'Congratulation! ': 'Opps..:( '} Your result is ${response.score}%` 
+           scoreResult.innerHTML = `${response.Passed ? `Congratulation! ${response.user}`: 'Opps..:( '} Your result is ${response.score}%` 
            results.forEach(res => {
                const resDiv = document.createElement("div")
                for(const [question, resp] of Object.entries(res)){

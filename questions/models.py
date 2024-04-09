@@ -8,6 +8,7 @@ class Questions(models.Model):
     text = models.CharField(max_length=200)
     quiz = models.ForeignKey(Aquiz, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+    #ans = models.ManyToManyField('Answer', blank=True)
 
     def __str__(self):
         return f"{self.text}"

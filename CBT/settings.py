@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # PACKAGES
+    "corsheaders",
+    'rest_framework',
+
     # APP
     'Quiz',
     'questions',
@@ -50,7 +54,9 @@ INSTALLED_APPS = [
     "QuizApi"
 ]
 
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,7 +89,12 @@ TEMPLATES = [
 # WSGI_APPLICATION = 'CBT.wsgi.application'
 WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000"
+]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -153,6 +164,19 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# REST FRAMEWORK SETTINGS
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

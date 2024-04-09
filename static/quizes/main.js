@@ -29,8 +29,8 @@ btnModals.forEach((btnModal) =>
     `;
 
     btnForPk.addEventListener("click", () => {
-      //window.location.href = url + pk;
-      url += pk;
+        window.location.href = url + pk;
+      //url += pk;
     });
   })
 );

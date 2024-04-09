@@ -12,8 +12,7 @@ def quizListView(request):
 
 
 def quizDetailView(request, pk):
-    user = request.user
-    quiz = Aquiz.objects.get(pk=pk, user=user)
+    quiz = Aquiz.objects.get(pk=pk)
     return render(request, 'quizes/quiz.html', {'quiz': quiz})
 
 
@@ -35,6 +34,7 @@ def quiz_data_view(request, pk):
 
 def save_quiz_view(request, pk):
     # print(request.POST)
+    user = request.user
     if request.is_ajax():
         data = request.POST
         data_ = dict(data.lists())
@@ -75,10 +75,10 @@ def save_quiz_view(request, pk):
             else:
                 results.append({str(q): 'Not answered'})
         score_ = score * multiplier
-        Result.objects.create(quiz=quiz, score=score_)
+        Result.objects.create(quiz=quiz, score=score_, user=user)
         # Result.objects.create(quiz = quiz, user = user, score = score_)
         if score_ >= quiz.required_score_to_pass:
-            return JsonResponse({"Passed": True, "score": score_, "results": results})
+            return JsonResponse({"Passed": True, "score": score_, "results": results, 'user': user.username})
         else:
             return JsonResponse({
                 'passed': False,
